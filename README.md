@@ -17,7 +17,7 @@ Alternatively, you can skip this step, clone the repo and run the script locally
 
 ## Usage
 
-1. Implement your custom JQ filters in a .snyk/snyk.yml file (see sample in sample-filters and tweak things from there - use [![JQPlay]](https://jqplay.org/) )
+1. Implement your custom JQ filters in a .snyk/snyk.yml file (see sample in sample-filters and tweak things from there - use [JQPlay](https://jqplay.org/) )
 
 2. Place the snyk.yml file in .snyk folder
 
