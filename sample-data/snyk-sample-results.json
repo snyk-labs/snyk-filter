@@ -1,0 +1,2172 @@
+{
+  "ok": false,
+  "vulnerabilities": [
+    {
+      "title": "Uninitialized Memory Exposure",
+      "credit": [
+        "Feross Aboukhadijeh"
+      ],
+      "moduleName": "bl",
+      "language": "js",
+      "packageManager": "npm",
+      "id": "npm:bl:20160119",
+      "packageName": "bl",
+      "description": "## Overview\n[bl](https://www.npmjs.com/package/bl) is a storage object for collections of Node Buffers.\n\nA possible memory disclosure vulnerability exists when a value of type `number` is provided to the `append()` method and results in concatenation of uninitialized memory to the buffer collection.\n\nThis is a result of unobstructed use of the `Buffer` constructor, whose [insecure default constructor increases the odds of memory leakage](https://snyk.io/blog/exploiting-buffer/).\n\n## Details\nConstructing a `Buffer` class with integer `N` creates a `Buffer` of length `N` with raw (not \"zero-ed\") memory.\n\nIn the following example, the first call would allocate 100 bytes of memory, while the second example will allocate the memory needed for the string \"100\":\n```js\n// uninitialized Buffer of length 100\nx = new Buffer(100);\n// initialized Buffer with value of '100'\nx = new Buffer('100');\n```\n\n`bl`'s `append` function uses the default `Buffer` constructor as-is, making it easy to append uninitialized memory to an existing list. If the value of the buffer list is exposed to users, it may expose raw server side memory, potentially holding secrets, private data and code. This is a similar vulnerability to the infamous [`Heartbleed`](http://heartbleed.com/) flaw in OpenSSL.\n\n```js\nconst BufferList = require('bl')\n\nvar bl = new BufferList()\nbl.append(new Buffer('abcd'))\nbl.append(new Buffer('efg'))\nbl.append('100')\n// appends a Buffer holding 100 bytes of uninitialized memory\nbl.append(100)                     \nbl.append(new Buffer('j'))\n```\n\nYou can read more about the insecure `Buffer` behavior [on our blog](https://snyk.io/blog/exploiting-buffer/).\n\nSimilar vulnerabilities were discovered in [request](https://snyk.io/vuln/npm:request:20160119), [mongoose](https://snyk.io/vuln/npm:mongoose:20160116), [ws](https://snyk.io/vuln/npm:ws:20160104) and [sequelize](https://snyk.io/vuln/npm:sequelize:20160115).\n\n## References\n- https://github.com/rvagg/bl/pull/22\n- https://github.com/rvagg/bl/compare/v1.0.0...v1.0.1\n- https://snyk.io/blog/exploiting-buffer/\n",
+      "semver": {
+        "vulnerable": "<0.9.5 || 1.0.0",
+        "unaffected": ">1.0.0 || 0.9.5"
+      },
+      "identifiers": {
+        "CWE": [
+          "CWE-201"
+        ],
+        "CVE": [],
+        "ALTERNATIVE": [
+          "SNYK-JS-BL-10138"
+        ]
+      },
+      "patches": [
+        {
+          "urls": [
+            "https://s3.amazonaws.com/snyk-rules-pre-repository/snapshots/master/patches/npm/bl/20160119/bl_20160911_0_0_061279d92f45f4e04f3cb252db3816feb4bc6f33.patch"
+          ],
+          "version": "0.9.4 || 1.0.0",
+          "modificationTime": "2016-09-11T00:00:00.000Z",
+          "comments": [],
+          "id": "patch:npm:bl:20160119:0"
+        }
+      ],
+      "cvssScore": 5.1,
+      "severity": "medium",
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "creationTime": "2016-09-11T17:00:00.000Z",
+      "modificationTime": "2016-09-11T17:00:00.000Z",
+      "publicationTime": "2016-09-18T17:00:00.000Z",
+      "disclosureTime": "2016-01-19T18:58:00.000Z",
+      "alternativeIds": [
+        "SNYK-JS-BL-10138"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "level-sublevel@6.6.1",
+        "levelup@0.19.1",
+        "bl@0.8.2"
+      ],
+      "upgradePath": [
+        false,
+        false,
+        false,
+        "levelup@1.0.0"
+      ],
+      "version": "0.8.2",
+      "name": "bl",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/level-sublevel/node_modules/bl/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "credit": [
+        "Jamie Davis"
+      ],
+      "moduleName": "bson",
+      "packageName": "bson",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[`bson`](https://www.npmjs.com/package/bson) is a bson parser for node.js and the browser\n\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) attacks. This can cause an impact of about 10 seconds matching time for data 50K characters long.\n\n## Disclosure Timeline\n* Feb 15th, 2018 - Initial Disclosure to package owner\n* Feb 26th, 2018 - Initial Response from package owner\n* Feb 26th, 2018 - Fix issued\n* Feb 27th, 2018 - Vulnerability published\n\n## Details\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its original and legitimate users. There are many types of DoS attacks, ranging from trying to clog the network pipes to the system by generating a large volume of traffic from many machines (a Distributed Denial of Service - DDoS - attack) to sending crafted requests that cause a system to crash or take a disproportional amount of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren't very intuitive and can ultimately end up making it easy for attackers to take your site down.\n\nLet’s take the following regular expression as an example:\n```js\nregex = /A(B|C+)+D/\n```\n\nThis regular expression accomplishes the following:\n- `A` The string must start with the letter 'A'\n- `(B|C+)+` The string must then follow the letter A with either the letter 'B' or some number of occurrences of the letter 'C' (the `+` matches one or more times). The `+` at the end of this section states that we can look for one or more matches of this section.\n- `D` Finally, we ensure this section of the string ends with a 'D'\n\nThe expression would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD` and `ACCCCCD`\n\nIt most cases, it doesn't take very long for a regex engine to find a match:\n\n```bash\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n0.04s user 0.01s system 95% cpu 0.052 total\n\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n1.79s user 0.02s system 99% cpu 1.812 total\n```\n\nThe entire process of testing it against a 30 characters long string takes around ~52ms. But when given an invalid string, it takes nearly two seconds to complete the test, over ten times as long as it took to test a valid string. The dramatic difference is due to the way regular expressions get evaluated.\n\nMost Regex engines will work very similarly (with minor differences). The engine will match the first possible way to accept the current character and proceed to the next one. If it then fails to match the next one, it will backtrack and see if there was another way to digest the previous character. If it goes too far down the rabbit hole only to find out the string doesn’t match in the end, and if many characters have multiple valid regex paths, the number of backtracking steps can become very large, resulting in what is known as _catastrophic backtracking_.\n\nLet's look at how our expression runs into this problem, using a shorter string: \"ACCCX\". While it seems fairly straightforward, there are still four different ways that the engine could match those three C's:\n1. CCC\n2. CC+C\n3. C+CC\n4. C+C+C.\n\nThe engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use [RegEx 101 debugger](https://regex101.com/debugger) to see the engine has to take a total of 38 steps before it can determine the string doesn't match.\n\nFrom there, the number of steps the engine must use to validate a string just continues to grow.\n\n| String | Number of C's | Number of steps |\n| -------|-------------:| -----:|\n| ACCCX | 3 | 38\n| ACCCCX | 4 | 71\n| ACCCCCX | 5 | 136\n| ACCCCCCCCCCCCCCX | 14 | 65,553\n\nBy the time the string includes 14 C's, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.\n\n## Remediation\nUpgrade `bson` to version 1.0.5 or higher\n\n## References\n- [GitHub Commit](https://github.com/mongodb/js-bson/commit/bd61c45157c53a1698ff23770160cf4783e9ea4a)",
+      "semver": {
+        "vulnerable": "<1.0.5",
+        "unaffected": ">=1.0.5"
+      },
+      "identifiers": {
+        "CWE": [
+          "CWE-185",
+          "CWE-400"
+        ],
+        "CVE": [],
+        "ALTERNATIVE": [
+          "SNYK-JS-BSON-10988"
+        ]
+      },
+      "patches": [],
+      "cvssScore": 3.7,
+      "severity": "low",
+      "CVSSv3": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "creationTime": "2018-02-27T13:46:53.813Z",
+      "modificationTime": "2018-02-27T13:46:53.813Z",
+      "publicationTime": "2018-02-27T16:32:24.910Z",
+      "disclosureTime": "2018-02-27T13:46:53.813Z",
+      "id": "npm:bson:20180225",
+      "alternativeIds": [
+        "SNYK-JS-BSON-10988"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21",
+        "bson@0.4.23"
+      ],
+      "upgradePath": [
+        false,
+        false,
+        "mongodb@2.2.13",
+        "mongodb-core@2.1.0",
+        "bson@1.0.5"
+      ],
+      "version": "0.4.23",
+      "name": "bson",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/bson/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "credit": [
+        "Jamie Davis"
+      ],
+      "moduleName": "bson",
+      "packageName": "bson",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[`bson`](https://www.npmjs.com/package/bson) is a bson parser for node.js and the browser\n\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) attacks. This can cause an impact of about 10 seconds matching time for data 50K characters long.\n\n## Disclosure Timeline\n* Feb 15th, 2018 - Initial Disclosure to package owner\n* Feb 26th, 2018 - Initial Response from package owner\n* Feb 26th, 2018 - Fix issued\n* Feb 27th, 2018 - Vulnerability published\n\n## Details\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its original and legitimate users. There are many types of DoS attacks, ranging from trying to clog the network pipes to the system by generating a large volume of traffic from many machines (a Distributed Denial of Service - DDoS - attack) to sending crafted requests that cause a system to crash or take a disproportional amount of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren't very intuitive and can ultimately end up making it easy for attackers to take your site down.\n\nLet’s take the following regular expression as an example:\n```js\nregex = /A(B|C+)+D/\n```\n\nThis regular expression accomplishes the following:\n- `A` The string must start with the letter 'A'\n- `(B|C+)+` The string must then follow the letter A with either the letter 'B' or some number of occurrences of the letter 'C' (the `+` matches one or more times). The `+` at the end of this section states that we can look for one or more matches of this section.\n- `D` Finally, we ensure this section of the string ends with a 'D'\n\nThe expression would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD` and `ACCCCCD`\n\nIt most cases, it doesn't take very long for a regex engine to find a match:\n\n```bash\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n0.04s user 0.01s system 95% cpu 0.052 total\n\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n1.79s user 0.02s system 99% cpu 1.812 total\n```\n\nThe entire process of testing it against a 30 characters long string takes around ~52ms. But when given an invalid string, it takes nearly two seconds to complete the test, over ten times as long as it took to test a valid string. The dramatic difference is due to the way regular expressions get evaluated.\n\nMost Regex engines will work very similarly (with minor differences). The engine will match the first possible way to accept the current character and proceed to the next one. If it then fails to match the next one, it will backtrack and see if there was another way to digest the previous character. If it goes too far down the rabbit hole only to find out the string doesn’t match in the end, and if many characters have multiple valid regex paths, the number of backtracking steps can become very large, resulting in what is known as _catastrophic backtracking_.\n\nLet's look at how our expression runs into this problem, using a shorter string: \"ACCCX\". While it seems fairly straightforward, there are still four different ways that the engine could match those three C's:\n1. CCC\n2. CC+C\n3. C+CC\n4. C+C+C.\n\nThe engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use [RegEx 101 debugger](https://regex101.com/debugger) to see the engine has to take a total of 38 steps before it can determine the string doesn't match.\n\nFrom there, the number of steps the engine must use to validate a string just continues to grow.\n\n| String | Number of C's | Number of steps |\n| -------|-------------:| -----:|\n| ACCCX | 3 | 38\n| ACCCCX | 4 | 71\n| ACCCCCX | 5 | 136\n| ACCCCCCCCCCCCCCX | 14 | 65,553\n\nBy the time the string includes 14 C's, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.\n\n## Remediation\nUpgrade `bson` to version 1.0.5 or higher\n\n## References\n- [GitHub Commit](https://github.com/mongodb/js-bson/commit/bd61c45157c53a1698ff23770160cf4783e9ea4a)",
+      "semver": {
+        "vulnerable": "<1.0.5",
+        "unaffected": ">=1.0.5"
+      },
+      "identifiers": {
+        "CWE": [
+          "CWE-185",
+          "CWE-400"
+        ],
+        "CVE": [],
+        "ALTERNATIVE": [
+          "SNYK-JS-BSON-10988"
+        ]
+      },
+      "patches": [],
+      "cvssScore": 3.7,
+      "severity": "low",
+      "CVSSv3": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "creationTime": "2018-02-27T13:46:53.813Z",
+      "modificationTime": "2018-02-27T13:46:53.813Z",
+      "publicationTime": "2018-02-27T16:32:24.910Z",
+      "disclosureTime": "2018-02-27T13:46:53.813Z",
+      "id": "npm:bson:20180225",
+      "alternativeIds": [
+        "SNYK-JS-BSON-10988"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21",
+        "bson@0.4.23"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "mongodb@2.2.13",
+        "mongodb-core@2.1.0",
+        "bson@1.0.5"
+      ],
+      "version": "0.4.23",
+      "name": "bson",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/bson/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "boom@4.3.1",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "boom@4.3.1",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "sntp@2.1.0",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "sntp@2.1.0",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "cryptiles@3.1.2",
+        "boom@5.2.0",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "cryptiles@3.1.2",
+        "boom@5.2.0",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "boom@4.3.1",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "boom@4.3.1",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "sntp@2.1.0",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "sntp@2.1.0",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "cryptiles@3.1.2",
+        "boom@5.2.0",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "cryptiles@3.1.2",
+        "boom@5.2.0",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "boom@4.3.1",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "boom@4.3.1",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "sntp@2.1.0",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "sntp@2.1.0",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "hoek",
+      "packageName": "hoek",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[hoek](https://github.com/hapijs/hoek) is a Utility methods for the hapi ecosystem.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar Hoek = require('hoek');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\nHoek.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n\n```\n\n## Remediation\nUpgrade `hoek` to versions 4.2.1, 5.0.3 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310439)\n- [GitHub Issue - 4.2.1 Backport](https://github.com/hapijs/hoek/issues/230)",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-HOEK-12061"
+        ],
+        "CVE": [
+          "CVE-2018-3728"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "NSP": 566
+      },
+      "semver": {
+        "unaffected": ">=4.2.1 <5.0.0 || >=5.0.3",
+        "vulnerable": "<4.2.1 || >=5.0.0 <5.0.3"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.612Z",
+      "modificationTime": "2018-02-13T22:28:27.612Z",
+      "publicationTime": "2018-02-14T13:22:50.418Z",
+      "disclosureTime": "2018-02-12T22:28:27.612Z",
+      "id": "npm:hoek:20180212",
+      "alternativeIds": [
+        "SNYK-JS-HOEK-12061"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "cryptiles@3.1.2",
+        "boom@5.2.0",
+        "hoek@4.2.0"
+      ],
+      "upgradePath": [
+        false,
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "hawk@6.0.2",
+        "cryptiles@3.1.2",
+        "boom@5.2.0",
+        "hoek@4.2.1"
+      ],
+      "version": "4.2.0",
+      "name": "hoek",
+      "isUpgradable": true,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/hoek/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "lodash",
+      "packageName": "lodash",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[lodash](https://lodash.com/) is a javaScript utility library delivering modularity, performance & extras.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar _= require('lodash');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\n_.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n```\n\n## Remediation\nUpgrade `lodash` to version 4.17.5 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310443)\n",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-LODASH-12060"
+        ],
+        "CVE": [
+          "CVE-2018-3721"
+        ],
+        "CWE": [
+          "CWE-400"
+        ]
+      },
+      "semver": {
+        "unaffected": ">=4.17.5",
+        "vulnerable": "<4.17.5"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.654Z",
+      "modificationTime": "2018-02-13T22:28:27.654Z",
+      "publicationTime": "2018-02-14T13:22:50.572Z",
+      "disclosureTime": "2018-01-30T22:28:27.654Z",
+      "id": "npm:lodash:20180130",
+      "alternativeIds": [
+        "SNYK-JS-LODASH-12060"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ioredis@1.15.1",
+        "lodash@3.10.1"
+      ],
+      "upgradePath": [
+        false,
+        false,
+        "ioredis@2.0.0",
+        "lodash@4.17.5"
+      ],
+      "version": "3.10.1",
+      "name": "lodash",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/ioredis/node_modules/lodash/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "title": "Prototype Pollution",
+      "credit": [
+        "Olivier Arteau (HoLyVieR)"
+      ],
+      "moduleName": "lodash",
+      "packageName": "lodash",
+      "language": "js",
+      "packageManager": "npm",
+      "description": "## Overview\n[lodash](https://lodash.com/) is a javaScript utility library delivering modularity, performance & extras.\n\nAffected versions of this package are vulnerable to Prototype Pollution. \nThe utilities function allow modification of the `Object` prototype. If an attacker can control part of the structure passed to this function, they could add or modify an existing property.  \n\n## PoC by Olivier Arteau (HoLyVieR)\n```js\nvar _= require('lodash');\nvar malicious_payload = '{\"__proto__\":{\"oops\":\"It works !\"}}';\n\nvar a = {};\nconsole.log(\"Before : \" + a.oops);\n_.merge({}, JSON.parse(malicious_payload));\nconsole.log(\"After : \" + a.oops);\n```\n\n## Remediation\nUpgrade `lodash` to version 4.17.5 or higher.\n\n## References\n- [HackerOne Report](https://hackerone.com/reports/310443)\n",
+      "identifiers": {
+        "ALTERNATIVE": [
+          "SNYK-JS-LODASH-12060"
+        ],
+        "CVE": [
+          "CVE-2018-3721"
+        ],
+        "CWE": [
+          "CWE-400"
+        ]
+      },
+      "semver": {
+        "unaffected": ">=4.17.5",
+        "vulnerable": "<4.17.5"
+      },
+      "severity": "low",
+      "cvssScore": 1.8,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "creationTime": "2018-02-12T22:28:27.654Z",
+      "modificationTime": "2018-02-13T22:28:27.654Z",
+      "publicationTime": "2018-02-14T13:22:50.572Z",
+      "disclosureTime": "2018-01-30T22:28:27.654Z",
+      "id": "npm:lodash:20180130",
+      "alternativeIds": [
+        "SNYK-JS-LODASH-12060"
+      ],
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "lodash@3.10.1"
+      ],
+      "upgradePath": [
+        false,
+        false,
+        false,
+        "kafka-node@1.3.2",
+        "lodash@4.17.5"
+      ],
+      "version": "3.10.1",
+      "name": "lodash",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/kafka-node/node_modules/lodash/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.6.0"
+        ]
+      },
+      "id": "snyk:lic:npm:aws-sign2:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "aws-sign2",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:36.319Z",
+      "creationTime": "2018-03-11T12:36:36.319Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "aws-sign2@0.7.0"
+      ],
+      "upgradePath": [],
+      "version": "0.7.0",
+      "name": "aws-sign2",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/aws-sign2/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.6.0"
+        ]
+      },
+      "id": "snyk:lic:npm:aws-sign2:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "aws-sign2",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:36.319Z",
+      "creationTime": "2018-03-11T12:36:36.319Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "aws-sign2@0.7.0"
+      ],
+      "upgradePath": [],
+      "version": "0.7.0",
+      "name": "aws-sign2",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/aws-sign2/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.6.0"
+        ]
+      },
+      "id": "snyk:lic:npm:aws-sign2:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "aws-sign2",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:36.319Z",
+      "creationTime": "2018-03-11T12:36:36.319Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "aws-sign2@0.7.0"
+      ],
+      "upgradePath": [],
+      "version": "0.7.0",
+      "name": "aws-sign2",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/aws-sign2/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.0.4"
+        ]
+      },
+      "id": "snyk:lic:npm:bson:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "bson",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:36.803Z",
+      "creationTime": "2018-03-11T12:36:36.803Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21",
+        "bson@0.4.23"
+      ],
+      "upgradePath": [],
+      "version": "0.4.23",
+      "name": "bson",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/bson/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.0.4"
+        ]
+      },
+      "id": "snyk:lic:npm:bson:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "bson",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:36.803Z",
+      "creationTime": "2018-03-11T12:36:36.803Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21",
+        "bson@0.4.23"
+      ],
+      "upgradePath": [],
+      "version": "0.4.23",
+      "name": "bson",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/bson/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.11.0"
+        ]
+      },
+      "id": "snyk:lic:npm:caseless:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "caseless",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:37.033Z",
+      "creationTime": "2018-03-11T12:36:37.033Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "caseless@0.12.0"
+      ],
+      "upgradePath": [],
+      "version": "0.12.0",
+      "name": "caseless",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/caseless/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.11.0"
+        ]
+      },
+      "id": "snyk:lic:npm:caseless:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "caseless",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:37.033Z",
+      "creationTime": "2018-03-11T12:36:37.033Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "caseless@0.12.0"
+      ],
+      "upgradePath": [],
+      "version": "0.12.0",
+      "name": "caseless",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/caseless/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.11.0"
+        ]
+      },
+      "id": "snyk:lic:npm:caseless:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "caseless",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:37.033Z",
+      "creationTime": "2018-03-11T12:36:37.033Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "caseless@0.12.0"
+      ],
+      "upgradePath": [],
+      "version": "0.12.0",
+      "name": "caseless",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/caseless/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.6.0"
+        ]
+      },
+      "id": "snyk:lic:npm:forever-agent:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "forever-agent",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:40.028Z",
+      "creationTime": "2018-03-11T12:36:40.028Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "forever-agent@0.6.1"
+      ],
+      "upgradePath": [],
+      "version": "0.6.1",
+      "name": "forever-agent",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/forever-agent/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.6.0"
+        ]
+      },
+      "id": "snyk:lic:npm:forever-agent:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "forever-agent",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:40.028Z",
+      "creationTime": "2018-03-11T12:36:40.028Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "forever-agent@0.6.1"
+      ],
+      "upgradePath": [],
+      "version": "0.6.1",
+      "name": "forever-agent",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/forever-agent/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.6.0"
+        ]
+      },
+      "id": "snyk:lic:npm:forever-agent:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "forever-agent",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:40.028Z",
+      "creationTime": "2018-03-11T12:36:40.028Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "forever-agent@0.6.1"
+      ],
+      "upgradePath": [],
+      "version": "0.6.1",
+      "name": "forever-agent",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/forever-agent/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.0.1"
+        ]
+      },
+      "id": "snyk:lic:npm:kerberos:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "kerberos",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.074Z",
+      "creationTime": "2018-03-11T12:36:41.074Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kerberos@0.0.23"
+      ],
+      "upgradePath": [],
+      "version": "0.0.23",
+      "name": "kerberos",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/kerberos/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=1.0.0"
+        ]
+      },
+      "id": "snyk:lic:npm:long:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "long",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.283Z",
+      "creationTime": "2018-03-11T12:36:41.283Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "buffermaker@1.2.0",
+        "long@1.1.2"
+      ],
+      "upgradePath": [],
+      "version": "1.1.2",
+      "name": "long",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/long/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=1.0.0-alpha3"
+        ]
+      },
+      "id": "snyk:lic:npm:mongodb-core:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "mongodb-core",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.543Z",
+      "creationTime": "2018-03-11T12:36:41.543Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21"
+      ],
+      "upgradePath": [],
+      "version": "1.3.21",
+      "name": "mongodb-core",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/mongodb-core/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=1.0.0-alpha3"
+        ]
+      },
+      "id": "snyk:lic:npm:mongodb-core:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "mongodb-core",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.543Z",
+      "creationTime": "2018-03-11T12:36:41.543Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21"
+      ],
+      "upgradePath": [],
+      "version": "1.3.21",
+      "name": "mongodb-core",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/mongodb-core/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.9.1"
+        ]
+      },
+      "id": "snyk:lic:npm:mongodb:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "mongodb",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.542Z",
+      "creationTime": "2018-03-11T12:36:41.542Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "mongodb@2.1.21"
+      ],
+      "upgradePath": [],
+      "version": "2.1.21",
+      "name": "mongodb",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/mongodb/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.9.1"
+        ]
+      },
+      "id": "snyk:lic:npm:mongodb:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "mongodb",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.542Z",
+      "creationTime": "2018-03-11T12:36:41.542Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "mongodb@2.1.21"
+      ],
+      "upgradePath": [],
+      "version": "2.1.21",
+      "name": "mongodb",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/mongodb/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "MPL-2.0",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "id": "snyk:lic:npm:node-ninja:MPL-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "node-ninja",
+      "title": "MPL-2.0 license",
+      "description": "MPL-2.0 license",
+      "publicationTime": "2018-03-11T12:36:41.950Z",
+      "creationTime": "2018-03-11T12:36:41.950Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/MPL-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2"
+      ],
+      "upgradePath": [],
+      "version": "1.0.2",
+      "name": "node-ninja",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/node-ninja/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.8.0"
+        ]
+      },
+      "id": "snyk:lic:npm:oauth-sign:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "oauth-sign",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.196Z",
+      "creationTime": "2018-03-11T12:36:42.196Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "oauth-sign@0.8.2"
+      ],
+      "upgradePath": [],
+      "version": "0.8.2",
+      "name": "oauth-sign",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/oauth-sign/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.8.0"
+        ]
+      },
+      "id": "snyk:lic:npm:oauth-sign:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "oauth-sign",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.196Z",
+      "creationTime": "2018-03-11T12:36:42.196Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "oauth-sign@0.8.2"
+      ],
+      "upgradePath": [],
+      "version": "0.8.2",
+      "name": "oauth-sign",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/oauth-sign/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.8.0"
+        ]
+      },
+      "id": "snyk:lic:npm:oauth-sign:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "oauth-sign",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.196Z",
+      "creationTime": "2018-03-11T12:36:42.196Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "oauth-sign@0.8.2"
+      ],
+      "upgradePath": [],
+      "version": "0.8.2",
+      "name": "oauth-sign",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/oauth-sign/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=2.34.0"
+        ]
+      },
+      "id": "snyk:lic:npm:request:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "request",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.865Z",
+      "creationTime": "2018-03-11T12:36:42.865Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0"
+      ],
+      "upgradePath": [],
+      "version": "2.83.0",
+      "name": "request",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/request/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=2.34.0"
+        ]
+      },
+      "id": "snyk:lic:npm:request:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "request",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.865Z",
+      "creationTime": "2018-03-11T12:36:42.865Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0"
+      ],
+      "upgradePath": [],
+      "version": "2.83.0",
+      "name": "request",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/request/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=2.34.0"
+        ]
+      },
+      "id": "snyk:lic:npm:request:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "request",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.865Z",
+      "creationTime": "2018-03-11T12:36:42.865Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0"
+      ],
+      "upgradePath": [],
+      "version": "2.83.0",
+      "name": "request",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/request/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "id": "snyk:lic:npm:require_optional:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "require_optional",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.870Z",
+      "creationTime": "2018-03-11T12:36:42.870Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21",
+        "require_optional@1.0.1"
+      ],
+      "upgradePath": [],
+      "version": "1.0.1",
+      "name": "require_optional",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/require_optional/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "id": "snyk:lic:npm:require_optional:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "require_optional",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:42.870Z",
+      "creationTime": "2018-03-11T12:36:42.870Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "mongodb@2.1.21",
+        "mongodb-core@1.3.21",
+        "require_optional@1.0.1"
+      ],
+      "upgradePath": [],
+      "version": "1.0.1",
+      "name": "require_optional",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/require_optional/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.4.2"
+        ]
+      },
+      "id": "snyk:lic:npm:tunnel-agent:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "tunnel-agent",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:43.642Z",
+      "creationTime": "2018-03-11T12:36:43.642Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "ascoltatori@3.2.0",
+        "kafka-node@0.5.9",
+        "snappy@5.0.5",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "tunnel-agent@0.6.0"
+      ],
+      "upgradePath": [],
+      "version": "0.6.0",
+      "name": "tunnel-agent",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/tunnel-agent/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.4.2"
+        ]
+      },
+      "id": "snyk:lic:npm:tunnel-agent:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "tunnel-agent",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:43.642Z",
+      "creationTime": "2018-03-11T12:36:43.642Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-gyp@3.4.0",
+        "request@2.83.0",
+        "tunnel-agent@0.6.0"
+      ],
+      "upgradePath": [],
+      "version": "0.6.0",
+      "name": "tunnel-agent",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/tunnel-agent/package.json",
+      "parentDepType": "prod"
+    },
+    {
+      "license": "Apache-2.0",
+      "semver": {
+        "vulnerable": [
+          ">=0.4.2"
+        ]
+      },
+      "id": "snyk:lic:npm:tunnel-agent:Apache-2.0",
+      "type": "license",
+      "packageManager": "npm",
+      "language": "js",
+      "packageName": "tunnel-agent",
+      "title": "Apache-2.0 license",
+      "description": "Apache-2.0 license",
+      "publicationTime": "2018-03-11T12:36:43.642Z",
+      "creationTime": "2018-03-11T12:36:43.642Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/Apache-2.0.txt",
+      "severity": "medium",
+      "from": [
+        "medium-sev-project@1.0.0",
+        "mosca@2.7.0",
+        "leveldown@1.4.6",
+        "prebuild@4.5.0",
+        "node-ninja@1.0.2",
+        "request@2.83.0",
+        "tunnel-agent@0.6.0"
+      ],
+      "upgradePath": [],
+      "version": "0.6.0",
+      "name": "tunnel-agent",
+      "isUpgradable": false,
+      "isPatchable": false,
+      "__filename": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project/node_modules/tunnel-agent/package.json",
+      "parentDepType": "prod"
+    }
+  ],
+  "dependencyCount": 398,
+  "org": "aarlaud-snyk-demo",
+  "licensesPolicy": {
+    "severities": {
+      "MS-RL": "medium",
+      "EPL-1.0": "medium",
+      "GPL-2.0": "high",
+      "GPL-3.0": "high",
+      "MPL-1.1": "medium",
+      "MPL-2.0": "medium",
+      "AGPL-1.0": "high",
+      "AGPL-3.0": "high",
+      "CDDL-1.0": "medium",
+      "LGPL-2.0": "medium",
+      "LGPL-2.1": "medium",
+      "LGPL-3.0": "medium",
+      "CPOL-1.02": "high",
+      "LGPL-2.1+": "medium",
+      "LGPL-3.0+": "medium",
+      "SimPL-2.0": "high",
+      "Apache-2.0": "medium",
+      "Artistic-1.0": "medium",
+      "Artistic-2.0": "medium"
+    }
+  },
+  "isPrivate": true,
+  "packageManager": "npm",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+  "ignoreSettings": null,
+  "summary": "46 vulnerable dependency paths",
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 17,
+  "path": "/Users/antoine/Documents/SnykSB/trash/medium-sev-project"
+}

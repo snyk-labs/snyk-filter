@@ -1,0 +1,21 @@
+{
+  "name": "snyk-filter",
+  "version": "0.0.1",
+  "description": "Module to consume json output from Snyk CLI for advanced filtering and results display",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests"
+  },
+  "author": "Antoine Arlaud, antoine@snyk.io",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "is-relative": "^1.0.0",
+    "lodash": "^4.17.5",
+    "minimist": "^1.2.0",
+    "node-jq": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.4"
+  }
+}

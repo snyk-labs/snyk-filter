@@ -1,0 +1,2726 @@
+[
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60069",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60070",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60071",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60072",
+        "from": [
+          "Dapper@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 97,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "8 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 8,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60069",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60070",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60071",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60072",
+        "from": [
+          "Dapper.StrongName@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 97,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "8 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 8,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.StrongName"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.Tests@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.Tests@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.Tests@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.Tests@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 195,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "4 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 4,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.Tests"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60069",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60070",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60071",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60072",
+        "from": [
+          "Dapper.Contrib@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 99,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "8 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 8,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.Contrib"
+  },
+  {
+    "ok": true,
+    "vulnerabilities": [],
+    "dependencyCount": 4,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "No known vulnerabilities",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.EntityFramework"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60069",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Security@4.0.0"
+        ],
+        "upgradePath": [],
+        "version": "4.0.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60070",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Security@4.0.0"
+        ],
+        "upgradePath": [],
+        "version": "4.0.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60071",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Security@4.0.0"
+        ],
+        "upgradePath": [],
+        "version": "4.0.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60072",
+        "from": [
+          "Dapper.Tests.Contrib@1.50.2",
+          "System.Net.Security@4.0.0"
+        ],
+        "upgradePath": [],
+        "version": "4.0.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 177,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "8 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 8,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.Tests.Contrib"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60069",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60070",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60071",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60072",
+        "from": [
+          "Dapper.SqlBuilder@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 88,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "8 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 8,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.SqlBuilder"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60069",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60070",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60071",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Security",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Security`](https://www.nuget.org/packages/System.Net.Security) provides types, such as System.Net.Security.SslStream, that uses SSL/TLS protocols to provide secure network communication between client and server endpoints.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Security` to version 4.0.1, 4.3.1 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.0.1), [4.3,4.3.1)",
+          "unaffected": "[4.0.1,4.3.0), [4.3.1,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETSECURITY-60072",
+        "from": [
+          "Dapper.Rainbow@1.50.2",
+          "System.Net.Security@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Security",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 88,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "8 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 8,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.Rainbow"
+  },
+  {
+    "ok": true,
+    "vulnerabilities": [],
+    "dependencyCount": 4,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "No known vulnerabilities",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "uniqueCount": 0,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.EntityFramework.StrongName"
+  },
+  {
+    "ok": false,
+    "vulnerabilities": [
+      {
+        "title": "Denial of Service (DoS)",
+        "credit": [
+          "David Fernandez"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) attacks.\n\nA denial of service vulnerability exists when the `ASP.NET Core` fails to properly validate web requests.\n\n**NOTE:** Microsoft has not commented on third-party claims that the issue is that the `TextEncoder.EncodeCore` function in the `System.Text.Encodings.Web` package in ASP.NET Core Mvc before 1.0.4 and 1.1.x before 1.1.3 allows remote attackers to cause a denial of service by leveraging failure to properly calculate the length of 4-byte characters in the Unicode Non-Character range.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0247)\n- [David Fernandez Blog](https://www.sidertia.com/Home/Community/Blog/2017/05/18/ASPNET-Core-Unicode-Non-Char-Encoding-DoS)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-254"
+          ],
+          "CVE": [
+            "CVE-2017-0247"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-09T00:00:00.000Z",
+        "disclosureTime": "2017-05-09T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60045",
+        "from": [
+          "Dapper.Tests.Performance@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Improper Certificate Validation",
+        "credit": [
+          "Joonwoo Yu",
+          "Hyoung-Kee Choi"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable due to Improper Certificate Validation. It allows an attacker to bypass _Enhanced Security Usage_ tagging when they present a certificate that is invalid for a specific use.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0248)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-287"
+          ],
+          "CVE": [
+            "CVE-2017-0248"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.5,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60046",
+        "from": [
+          "Dapper.Tests.Performance@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Privilege Escalation",
+        "credit": [
+          "Unknown"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Privilege Escalation due to failing to properly sanitize web requests,\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0249)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-269"
+          ],
+          "CVE": [
+            "CVE-2017-0249"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 7.3,
+        "severity": "high",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60047",
+        "from": [
+          "Dapper.Tests.Performance@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      },
+      {
+        "title": "Authentication Bypass",
+        "credit": [
+          "Mikhail Shcherbakov"
+        ],
+        "packageName": "System.Net.Http",
+        "language": "dotnet",
+        "packageManager": "nuget",
+        "description": "[`System.Net.Http`](https://www.nuget.org/packages/System.Net.Http) provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.\n\nAffected versions of this package are vulnerable to Authentication Bypass attacks. The ASP.NET Core fails to properly sanitize the _Web Request Handler_ component, allowing an attacker to spoof web requests and bypass authentication.\n\n## Remediation\nUpgrade `System.Net.Http` to version 4.1.2, 4.3.2 or higher.\n\n## References\n- [NVD](https://nvd.nist.gov/vuln/detail/2017-0256)\n- [Microsoft Security Advisory](https://technet.microsoft.com/en-us/library/security/4021279.aspx)\n- [GitHub Security Advisory](https://github.com/aspnet/Announcements/issues/239)\n",
+        "identifiers": {
+          "CWE": [
+            "CWE-20"
+          ],
+          "CVE": [
+            "CVE-2017-0256"
+          ]
+        },
+        "semver": {
+          "vulnerable": "[,4.1.2), [4.3,4.3.2)",
+          "unaffected": "[4.1.2,4.3.0), [4.3.2,)"
+        },
+        "patches": [],
+        "cvssScore": 5.3,
+        "severity": "medium",
+        "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+        "publicationTime": "2017-05-12T00:00:00.000Z",
+        "disclosureTime": "2017-05-12T00:00:00.000Z",
+        "modificationTime": "2017-07-19T00:00:00.000Z",
+        "creationTime": "2017-07-19T00:00:00.000Z",
+        "id": "SNYK-DOTNET-SYSTEMNETHTTP-60048",
+        "from": [
+          "Dapper.Tests.Performance@1.50.2",
+          "System.Net.Http@4.3.0"
+        ],
+        "upgradePath": [],
+        "version": "4.3.0",
+        "name": "System.Net.Http",
+        "isUpgradable": false,
+        "isPatchable": false
+      }
+    ],
+    "dependencyCount": 122,
+    "org": "aarlaud",
+    "licensesPolicy": {
+      "severities": {
+        "MS-RL": "medium",
+        "EPL-1.0": "medium",
+        "GPL-2.0": "high",
+        "GPL-3.0": "high",
+        "MPL-1.1": "medium",
+        "MPL-2.0": "medium",
+        "AGPL-1.0": "high",
+        "AGPL-3.0": "high",
+        "CDDL-1.0": "medium",
+        "LGPL-2.0": "medium",
+        "LGPL-2.1": "medium",
+        "LGPL-3.0": "medium",
+        "CPOL-1.02": "high",
+        "LGPL-2.1+": "medium",
+        "LGPL-3.0+": "medium",
+        "SimPL-2.0": "high",
+        "Artistic-1.0": "medium",
+        "Artistic-2.0": "medium"
+      }
+    },
+    "isPrivate": true,
+    "packageManager": "nuget",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.10.2\nignore: {}\npatch: {}\n",
+    "ignoreSettings": null,
+    "summary": "4 vulnerable dependency paths",
+    "alerts": [
+      {
+        "msg": "You have used your limit of private tests this billing period.",
+        "name": "tests-reached",
+        "type": "warning"
+      }
+    ],
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 4,
+    "path": "/Users/antoine/Documents/SnykSB/dotnet/Dapper/Dapper.Tests.Performance"
+  }
+]

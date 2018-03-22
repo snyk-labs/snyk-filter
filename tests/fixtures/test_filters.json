@@ -1,0 +1,20 @@
+{
+  "filters":{
+      "medium_and_upgradable": ".vulnerabilities |= map(if .isUpgradable == true and .severity == \"medium\" then . else empty end)",
+      "low_and_upgradable": ".vulnerabilities |= map(if .isUpgradable == true and .severity == \"low\" then . else empty end)",
+      "low_and_non_upgradable": ".vulnerabilities |= map(if .isUpgradable == false and .severity == \"low\" then . else empty end)",
+      "medium_and_non_upgradable": ".vulnerabilities |= map(if .isUpgradable == false and .severity == \"medium\" then . else empty end)"
+  },
+  "passFilters":{
+      "medium_and_upgradable": "[.vulnerabilities[] | select(.severity == \"medium\" and .isUpgradable == true)] | length",
+      "low_and_upgradable": "[.vulnerabilities[] | select(.severity == \"low\" and .isUpgradable == true)] | length",
+      "low_and_non_upgradable": "[.vulnerabilities[] | select(.severity == \"low\" and .isUpgradable == false)] | length",
+      "medium_and_non_upgradable": "[.vulnerabilities[] | select(.severity == \"medium\" and .isUpgradable == false)] | length"
+  },
+  "failMessages": {
+    "medium_and_upgradable": "Upgradable medium Severity issues detected. Please review upgrade steps",
+    "low_and_upgradable": "Upgradable low Severity issues detected. Please review upgrade steps",
+    "low_and_non_upgradable": "Non upgradable low Severity issues detected. Please review upgrade steps",
+    "medium_and_non_upgradable": "Non upgradable Medium Severity issues detected. Please review upgrade steps"
+  }
+}
