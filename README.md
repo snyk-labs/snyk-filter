@@ -17,9 +17,17 @@ Alternatively, you can skip this step, clone the repo and run the script locally
 
 ## Usage
 
-1. Implement your custom JQ filters in a json file (see sample in sample-filters and tweak things from there)
+1. Implement your custom JQ filters in a snyk.yml file (see sample in sample-filters and tweak things from there)
 
-2. Then pipe you snyk test json output into snyk-filter or use the -i argument to input a json file. Use the -f argument to point to the json file containing your custom filters.
+2. Place the snyk.yml file in .snyk folder
+
+2. Then pipe you snyk test json output into snyk-filter or use the -i argument to input a json file. Use the -f argument to point to the yml file containing your custom filters if you are not using the default location (<working_folder>/.snyk/snyk.yml).
+
+### Example
+snyk-filter -i snyk_results.json
+
+### Example with custom yml file location
+snyk-filter -i snyk_results.json -f ../myfolder/snyk.yml
 
 ### License
 

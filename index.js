@@ -29,8 +29,10 @@ if (argv.f) { // output destination
   if (typeof output === 'boolean') {
     output = undefined;
   }
-
+} else {
+  filters = path.join(__dirname,".snyk/snyk.yml");
 }
+
 
 
 snykFilter.run(source, onReportOutput, filters);
