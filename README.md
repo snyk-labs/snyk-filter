@@ -29,6 +29,9 @@ snyk-filter -i snyk_results.json
 ### Example with custom yml file location
 snyk-filter -i snyk_results.json -f ../myfolder/snyk.yml
 
+## Options
+`--json` to output json
+
 ### License
 
 [License: Apache License, Version 2.0](LICENSE)
