@@ -6,6 +6,7 @@ var argv = require('minimist')(process.argv.slice(2));
 var isRelative = require('is-relative');
 var path = require('path');
 var template, source, output;
+var options = {};
 
 if (argv.i) { // input source
   source = argv.i; // grab the next item
@@ -18,6 +19,9 @@ if (argv.o) { // output destination
   if (typeof output === 'boolean') {
     output = undefined;
   }
+}
+if (argv.json) { // output destination
+  options = {"json": true};
 }
 if (argv.f) { // output destination
   if(isRelative(argv.f)){
@@ -35,7 +39,7 @@ if (argv.f) { // output destination
 
 
 
-snykFilter.run(source, onReportOutput, filters);
+snykFilter.run(source, onReportOutput, filters, options);
 
 function onReportOutput(report) {
   if (output) {
