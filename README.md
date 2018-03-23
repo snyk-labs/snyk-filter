@@ -13,7 +13,7 @@ First, Install the Snyk Filter using npm:
 
 `npm install snyk-filter -g`
 
-Alternatively, you can skip this step, clone the repo and run the script locally (using `node ./snyk-filter.js`)
+Alternatively, you can skip this step, clone the repo and run the script locally (using `node ./index.js`)
 
 ## Usage
 
