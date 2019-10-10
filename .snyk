@@ -1,0 +1,22 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:braces:20180219':
+    - node-jq > bin-build > decompress > vinyl-fs > glob-stream > micromatch > braces:
+        reason: no fix yet
+        expires: '2019-11-09T19:08:50.450Z'
+    - node-jq > bin-build > download > vinyl-fs > glob-stream > micromatch > braces:
+        reason: no fix yet
+        expires: '2019-11-09T19:08:50.450Z'
+    - node-jq > bin-build > download > gulp-decompress > decompress > vinyl-fs > glob-stream > micromatch > braces:
+        reason: no fix yet
+        expires: '2019-11-09T19:08:50.450Z'
+  'snyk:lic:npm:tunnel-agent:Apache-2.0':
+    - node-jq > bin-build > download > caw > tunnel-agent:
+        reason: None given
+        expires: '2019-11-09T19:08:50.450Z'
+    - node-jq > download > caw > tunnel-agent:
+        reason: None given
+        expires: '2019-11-09T19:08:50.450Z'
+patch: {}
