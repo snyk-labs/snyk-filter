@@ -34,7 +34,7 @@ if (argv.f) { // output destination
     output = undefined;
   }
 } else {
-  filters = path.join(__dirname,".snyk/snyk.yml");
+  filters = path.join(__dirname,".snyk-filter/snyk.yml");
 }
 
 

@@ -7,13 +7,14 @@ The Snyk-filter module takes the json outputted from `snyk test --json` and adds
 
 # How do I use it?
 
-## Install or clone
+## Clone & Install
 
-First, Install the Snyk Filter using npm:
+First, clone the repo.
+Then run
 
-`npm install snyk-filter -g`
+`npm install`
 
-Alternatively, you can skip this step, clone the repo and run the script locally (using `node ./index.js`)
+
 
 ## Usage
 
