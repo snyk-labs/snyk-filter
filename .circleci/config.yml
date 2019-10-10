@@ -20,8 +20,8 @@ jobs:
       - run:
           name: "Snyk Test"
           command: |
-            snyk test --org=aarlaud-snyk
+            snyk test --org=aarlaud-snyk-dev
       - run:
           name: "Monitor"
           command: |
-            snyk monitor --org=aarlaud-snyk
+            snyk monitor --org=aarlaud-snyk-dev
