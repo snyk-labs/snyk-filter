@@ -5,6 +5,8 @@
 # Snyk Custom Filtering of SNYK CLI JSON output
 The Snyk-filter module takes the json outputted from `snyk test --json` and adds custom filtering for results filtering as well as breaking options for CI usage.
 
+[![CircleCI](https://circleci.com/gh/aarlaud-snyk/snyk-filter.svg?style=svg)](https://circleci.com/gh/aarlaud-snyk/snyk-filter)
+
 # How do I use it?
 
 ## Clone & Install
