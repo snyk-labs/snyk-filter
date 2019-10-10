@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.8.0
+    steps:
+      - run:
+          name: "Setup Snyk"
+          command: |
+            sudo npm install -g snyk
+      - checkout
+      - run:
+          name: "Install deps"
+          command: |
+            npm install
+      - run:
+          name: "Run Tests"
+          command: |
+            npm test
+      - run:
+          name: "Snyk Test"
+          command: |
+            snyk test --org=aarlaud-snyk
+      - run:
+          name: "Monitor"
+          command: |
+            snyk monitor --org=aarlaud-snyk
