@@ -14,7 +14,7 @@
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.12",
     "minimist": "^1.2.0",
-    "node-jq": "^1.5.0",
+    "node-jq": "^1.10.3",
     "snyk": "^1.234.0"
   },
   "devDependencies": {
