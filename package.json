@@ -15,7 +15,7 @@
     "is-relative": "^1.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.12",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "node-jq": "^1.10.3",
     "snyk": "^1.258.2"
   },
