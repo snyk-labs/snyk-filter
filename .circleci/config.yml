@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.8.0
+      - image: circleci/node:10.16.3
     steps:
       - run:
           name: "Setup Snyk"
@@ -20,8 +20,8 @@ jobs:
       - run:
           name: "Snyk Test"
           command: |
-            snyk test --org=aarlaud-snyk-dev
+            snyk test --org=customer-facing-tools
       - run:
           name: "Monitor"
           command: |
-            snyk monitor --org=aarlaud-snyk-dev
+            snyk monitor --org=customer-facing-tools
