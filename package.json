@@ -10,6 +10,9 @@
   },
   "author": "Antoine Arlaud, antoine@snyk.io",
   "license": "ISC",
+  "bin" : { 
+    "snyk-filter": "./index.js"
+  },
   "dependencies": {
     "chalk": "^2.3.2",
     "is-relative": "^1.0.0",
