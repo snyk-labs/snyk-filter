@@ -1,0 +1,5 @@
+version: 2
+customFilters:
+  filter: ".vulnerabilities |= map(if ((.severity == \"high\") and (.packageName != \"org.apache.struts:struts2-core\") and (.packageName != \"org.apache.struts.xwork:xwork-core\") and (.packageName != \"org.springframework:spring-web\")) then . else empty end)"
+  pass: ".vulnerabilities[] | select ((.severity == \"high\") and (.packageName != \"org.apache.struts:struts2-core\") and (.packageName != \"org.apache.struts.xwork:xwork-core\") and (.packageName != \"org.springframework:spring-web\")) | length"
+  msg: "Issues found with filter -> severity: high, packageName is not one of (org.apache.struts.xwork:xwork-core,org.apache.struts:struts2-core,org.springframework:spring-web)"
