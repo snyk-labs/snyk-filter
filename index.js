@@ -3,7 +3,7 @@
 var fs = require('fs');
 var snykFilter = require('./lib/snyk-filter.js');
 var argv = require('minimist')(process.argv.slice(2));
-var isRelative = require('is-relative');
+var os = require('os');
 var path = require('path');
 var template, source, output;
 var options = {};
@@ -24,17 +24,14 @@ if (argv.json) { // output destination
   options = {"json": true};
 }
 if (argv.f) { // output destination
-  if(isRelative(argv.f)){
-    filters = path.join(__dirname, argv.f);
-  } else {
-    filters = argv.f;
-  }
+
+  filters = argv.f;
 
   if (typeof output === 'boolean') {
     output = undefined;
   }
 } else {
-  filters = path.join(__dirname,".snyk-filter/snyk.yml");
+  filters = path.join(process.cwd(), "/.snyk-filter/snyk.yml");
 }
 
 
