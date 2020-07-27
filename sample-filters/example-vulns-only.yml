@@ -1,0 +1,5 @@
+version: 2
+customFilters:
+  filter: ".vulnerabilities |= map(if .type != \"license\" then . else empty end)"
+  pass: "[.vulnerabilities[] | select(.type != \"license\")] | length"
+  msg: "Vulnerabilities found"
