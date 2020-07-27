@@ -1,5 +1,0 @@
-{
-  "filter": ".vulnerabilities |= map(if .isUpgradable == true and .severity == \"high\" then . else empty end)",
-  "pass": "[.vulnerabilities[] | select(.severity == \"low\" and .isUpgradable == true)] | length",
-  "msg": "Low Severity issues detected. Please review upgrade steps"
-}
