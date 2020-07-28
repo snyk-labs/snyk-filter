@@ -17,6 +17,7 @@ Then run
 
 `npm install -g`
 
+`jq` is required to be installed on your machine
 
 ## Usage
 
