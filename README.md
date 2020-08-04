@@ -17,17 +17,20 @@ Then run
 
 `npm install -g`
 
-Note about `node-jq`
+### Note about `node-jq`
 
 snyk-filter uses the `node-jq` library, which requires that a [`jq`](https://stedolan.github.io/jq/) binary is installed.  This typically happens transparently via `npm install -g`, but on some systems JQ does not get properly installed locally. If you receive an error after installation regarding `node-jq`, then `jq` should be installed manually to avoid this error.
 
 ```
 # install jq ahead of time (ubuntu example)
 sudo apt-get install -y jq
+
 # tell node-jq to skip trying to install it on its own
 export NODE_JQ_SKIP_INSTALL_BINARY=true
+
 # tell node-jq where the existing jq binary is
 export JQ_PATH=$(which jq)
+
 # finally, install snyk-filter
 sudo npm install -g
 ```
