@@ -41,7 +41,7 @@ sudo npm install -g
 
 2. Then pipe your `snyk test --json` output into `snyk-filter` or use the `-i` argument to input a json file. Use the `-f` argument to point to the yml file containing your custom filters if you are not using the default location (.snyk-filter/snyk.yml).
 
-3. 
+3. Return code of snyk-filter will be 0 for pass (no issues) and 1 for fail (issues found)
 
 ### Example with Snyk CLI (using .snyk-filter/snyk.yml by default)
 `snyk test --json | snyk-filter`
