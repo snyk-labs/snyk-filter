@@ -5,7 +5,7 @@
 # Custom Filtering for Snyk CLI
 snyk-filter takes the JSON outputted from the [Snyk CLI](https://support.snyk.io/hc/en-us/articles/360003812578-CLI-reference), e.g. `snyk test --json` and applies custom filtering of the results, as well as options to fail your build.
 
-[![Known Vulnerabilities](https://snyk.io//test/github/snyk-tech-services/snyk-filter/badge.svg?targetFile=package.json)](https://snyk.io//test/github/aarlaud-snyk/snyk-filter?targetFile=package.json)
+[![Known Vulnerabilities](https://snyk.io//test/github/snyk-tech-services/snyk-filter/badge.svg?targetFile=package.json)](https://snyk.io//test/github/snyk-tech-services/snyk-filter?targetFile=package.json)
 [![CircleCI](https://circleci.com/gh/snyk-tech-services/snyk-filter.svg?style=svg)](https://circleci.com/gh/snyk-tech-services/snyk-filter)
 
 # How do I use it?
@@ -31,7 +31,7 @@ export NODE_JQ_SKIP_INSTALL_BINARY=true
 # tell node-jq where the existing jq binary is
 export JQ_PATH=$(which jq)
 
-# finally, install snyk-filter
+# finally, install snyk-filter (does not work with node version > 12)
 sudo npm install -g
 ```
 
