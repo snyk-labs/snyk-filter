@@ -30,24 +30,24 @@ ignore:
         reason: no fix avail yet
         expires: '2020-04-11T08:48:22.379Z'
   SNYK-JS-DECOMPRESSTAR-559095:
-    - node-jq > bin-build > decompress > decompress-tar:
+    - node-jq:
         reason: no fix avail yet
-        expires: '2020-08-26T18:40:13.634Z'
+        expires: '2020-12-26T04:18:20.858Z'
     - node-jq > download > decompress > decompress-tar:
         reason: no fix avail yet
-        expires: '2020-08-26T18:40:13.634Z'
+        expires: '2020-12-26T04:18:20.858Z'
     - node-jq > bin-build > decompress > decompress-tarbz2 > decompress-tar:
         reason: no fix avail yet
-        expires: '2020-08-26T18:40:13.634Z'
+        expires: '2020-12-26T04:18:20.858Z'
     - node-jq > download > decompress > decompress-tarbz2 > decompress-tar:
         reason: no fix avail yet
-        expires: '2020-08-26T18:40:13.634Z'
+        expires: '2020-12-26T04:18:20.858Z'
     - node-jq > bin-build > decompress > decompress-targz > decompress-tar:
         reason: no fix avail yet
-        expires: '2020-08-26T18:40:13.635Z'
+        expires: '2020-12-26T04:18:20.858Z'
     - node-jq > download > decompress > decompress-targz > decompress-tar:
         reason: no fix avail yet
-        expires: '2020-08-26T18:40:13.635Z'
+        expires: '2020-12-26T04:18:20.858Z'
     - node-jq > bin-build > download > decompress > decompress-tar:
         reason: no fix avail yet
         expires: '2020-08-26T18:40:13.635Z'
