@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var debug = require('debug')('index')
 var fs = require('fs');
 var snykFilter = require('./lib/snyk-filter.js');
 var argv = require('minimist')(process.argv.slice(2));
