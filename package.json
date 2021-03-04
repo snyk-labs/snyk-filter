@@ -7,7 +7,8 @@
     "test": "snyk test && mocha ./tests",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
-    "lint": "prettier --check **/*.js"
+    "lint": "prettier --check **/*.js",
+    "format": "prettier --write **/*.js"
   },
   "author": "Antoine Arlaud, antoine@snyk.io",
   "license": "ISC",
