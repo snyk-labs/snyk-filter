@@ -22,7 +22,7 @@
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.21",
     "minimist": "^1.2.3",
-    "node-jq": "^1.10.3",
+    "node-jq": "^1.12.0",
     "snyk": "^1.425.4"
   },
   "devDependencies": {
