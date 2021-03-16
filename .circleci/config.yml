@@ -1,31 +1,74 @@
-version: 2
+version: 2.1
+orbs:
+    snyk: snyk/snyk@0.0.8
 jobs:
-  build:
-    docker:
-      - image: circleci/node:10.16.3
-    steps:
-      - run:
-          name: "Setup Snyk"
-          command: |
-            sudo npm install -g snyk
-      - checkout
-      - run:
-          name: "Install deps"
-          command: |
-            npm install
-      - run:
-          name: "Run Lint"
-          command: |
-            npm run lint
-      - run:
-          name: "Run Tests"
-          command: |
-            npm test
-      - run:
-          name: "Snyk Test"
-          command: |
-            snyk test --org=customer-facing-tools
-      - run:
-          name: "Monitor"
-          command: |
-            snyk monitor --org=customer-facing-tools
+    build-test-publish:
+        docker:
+            - image: circleci/node:latest
+        steps:
+            - checkout
+            - run: npm install semantic-release @semantic-release/exec pkg --save-dev
+            - run: npm install
+            - run: npm test
+            - snyk/scan:
+                fail-on-issues: true
+                monitor-on-build: false
+                token-variable: SNYK_TOKEN
+            - run: npx semantic-release
+    build-test:
+        docker:
+            - image: circleci/node:latest
+        steps:
+            - checkout
+            - run: npm install
+            - run: npm test
+            - snyk/scan:
+                fail-on-issues: true
+                monitor-on-build: false
+                token-variable: SNYK_TOKEN
+            - run: npx tsc
+    build-test-from-fork:
+        docker:
+            - image: circleci/node:latest
+        steps:
+            - checkout
+            - run: npm install
+            - run: npm test
+            - run: npx tsc
+
+workflows:
+    version: 2.1
+    nightly:
+        triggers:
+          - schedule:
+              cron: "0 0 * * *"
+              filters:
+                branches:
+                  only:
+                    - master
+        jobs:
+            - build-test-publish:
+                context: SNYK
+
+    build-test-publish:
+        jobs:
+            - build-test-publish:
+                context: SNYK
+                filters:
+                    branches:
+                        only:
+                            - master
+    build-test:
+        jobs:
+            - build-test:
+                context: SNYK
+                filters:
+                    branches:
+                        ignore:
+                        - master
+                        - /pull\/[0-9]+/
+            - build-test-from-fork:
+                filters:
+                    branches:
+                        only:
+                        - /pull\/[0-9]+/
