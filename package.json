@@ -4,7 +4,7 @@
   "description": "Module to consume json output from Snyk CLI for advanced filtering and results display",
   "main": "index.js",
   "scripts": {
-    "test": "snyk test && mocha ./tests",
+    "test": "snyk test && mocha ./tests && npm run lint",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
     "lint": "prettier --check **/*.js",
