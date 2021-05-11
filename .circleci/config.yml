@@ -32,7 +32,8 @@ jobs:
                 monitor-on-build: false
                 token-variable: SNYK_TOKEN
                 additional-arguments: --json-file-output=snykTestResults.json
-            - run: ./snyk-prevent-gh-commit-status-linux ./snykTestResults.json ${GITHUB_TOKEN} ${CIRCLE_PROJECT_USERNAME} ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_SHA1} ${CIRCLE_PULL_REQUEST} ${CIRCLE_BUILD_URL}
+
+            - run: npx snyk-prevent-gh-commit-status ./snykTestResults.json ${GITHUB_TOKEN} ${CIRCLE_PROJECT_USERNAME} ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_SHA1} ${CIRCLE_PULL_REQUEST} ${CIRCLE_BUILD_URL}
     build-test-from-fork:
         docker:
             - image: circleci/node:latest
