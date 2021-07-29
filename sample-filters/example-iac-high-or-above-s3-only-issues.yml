@@ -1,0 +1,5 @@
+version: 2
+customFilters:
+  filter: "[.[].infrastructureAsCodeIssues[] | if .subType == \"S3\" and (.severity == \"high\" or .severity == \"critical\") then . else empty end]"
+  pass: "[.[].infrastructureAsCodeIssues[] | select(.subType == \"S3\" and (.severity == \"high\" or .severity == \"critical\"))] | length"
+  msg: "High or above severity S3 only type infrastructure as code issues found. Please review resolve steps"
