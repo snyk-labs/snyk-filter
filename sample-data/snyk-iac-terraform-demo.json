@@ -1,0 +1,621 @@
+[
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "main.tf",
+      "projectName": "snyk-iac-terraform-demo",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/main.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": false,
+      "infrastructureAsCodeIssues": [
+        {
+          "id": "SNYK-CC-TF-9",
+          "title": "IAM password should contain symbols",
+          "type": "aws",
+          "subType": "IAM",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Your password does not contain symbols",
+            "impact": "Your password is not following the recommended security practices and is not as strong as it should be",
+            "remediation": null,
+            "resolve": "Set the `require_symbols` attribute to be `true` to increase the strength of your password"
+          },
+          "lineNumber": 11,
+          "path": [
+            "input",
+            "resource",
+            "aws_iam_account_password_policy[strict]",
+            "require_symbols"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-8",
+          "title": "IAM password should contain lowercase",
+          "type": "aws",
+          "subType": "IAM",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Your password does not contain lowercase characters",
+            "impact": "Your password is not following the recommended security practices and is not as strong as it should be",
+            "remediation": null,
+            "resolve": "Set the `require_lowercase` attribute to be `true` to increase the strength of your password"
+          },
+          "lineNumber": 11,
+          "path": [
+            "input",
+            "resource",
+            "aws_iam_account_password_policy[strict]",
+            "require_lowercase_characters"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-74",
+          "title": "Credentials are configured via provider attributes",
+          "type": "aws",
+          "subType": "Provider",
+          "severity": "high",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Credentials are configured via provider attributes",
+            "impact": "Use of provider attributes can lead to accidental disclosure of credentials in configuration files, variable definition files, event logs or console logs",
+            "remediation": null,
+            "resolve": "Set access credentials via environment variables, and remove `access_key` and `secret_key` attributes from the configuration"
+          },
+          "lineNumber": 1,
+          "path": [
+            "provider[aws]"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-7",
+          "title": "IAM password should contain uppercase",
+          "type": "aws",
+          "subType": "IAM",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Your password does not contain uppercase characters",
+            "impact": "Your password is not following the recommended security practices and is not as strong as it should be",
+            "remediation": null,
+            "resolve": "Set the `require_uppercase` attribute to be `true` to increase the strength of your password"
+          },
+          "lineNumber": 11,
+          "path": [
+            "input",
+            "resource",
+            "aws_iam_account_password_policy[strict]",
+            "require_uppercase_characters"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-11",
+          "title": "IAM requires minimum password length",
+          "type": "aws",
+          "subType": "IAM",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Your password does not enforce a minimum length",
+            "impact": "Your password is not following the recommended security practices and is not as strong as it should be",
+            "remediation": null,
+            "resolve": "Set the `minimum_password_length` attribute to be at least `14` to increase the strength of your password"
+          },
+          "lineNumber": 12,
+          "path": [
+            "input",
+            "resource",
+            "aws_iam_account_password_policy[strict]",
+            "minimum_password_length"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-10",
+          "title": "IAM password should contain numbers",
+          "type": "aws",
+          "subType": "IAM",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Your password does not contain numbers",
+            "impact": "Your password is not following the recommended security practices and is not as strong as it should be",
+            "remediation": null,
+            "resolve": "Set the `require_numbers` attribute to be `true` to increase the strength of your password"
+          },
+          "lineNumber": 11,
+          "path": [
+            "input",
+            "resource",
+            "aws_iam_account_password_policy[strict]",
+            "require_numbers"
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "main.tf",
+      "projectName": "cloudtrail",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/modules/cloudtrail/main.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": false,
+      "infrastructureAsCodeIssues": [
+        {
+          "id": "SNYK-CC-TF-256",
+          "title": "CloudTrail not integrated with CloudWatch",
+          "type": "aws",
+          "subType": "CloudTrail",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "CloudTrail does not deliver logs to CloudWatch",
+            "impact": "Alarms cannot be configured to alert on CloudTrail events",
+            "remediation": {
+              "cloudformation": "Set `Properties.CloudWatchLogsLogGroupArn` attribute to cloudwatch log group ARN",
+              "terraform": "Set `cloud_watch_logs_group_arn` attribute to cloudwatch log group ARN"
+            },
+            "resolve": "Set `cloud_watch_logs_group_arn` attribute to cloudwatch log group ARN"
+          },
+          "lineNumber": 1,
+          "path": [
+            "resource",
+            "aws_cloudtrail[insecure-logging]",
+            "cloud_watch_logs_group_arn"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-17",
+          "title": "CloudTrail logs are not encrypted with managed key",
+          "type": "aws",
+          "subType": "CloudTrail",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "The CloudTrail logs are not encrypted with managed key",
+            "impact": "IAM policies cannot be used to control access to the decryption keys",
+            "remediation": {
+              "cloudformation": "Set `KMSKeyId` attribute to valid KMS key id",
+              "terraform": "Set `kms_key_id` attribute to valid KMS key id"
+            },
+            "resolve": "Set `kms_key_id` attribute to valid KMS key id"
+          },
+          "lineNumber": 1,
+          "path": [
+            "input",
+            "resource",
+            "aws_cloudtrail[insecure-logging]",
+            "kms_key_id"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-16",
+          "title": "CloudTrail does not have log file validation enabled",
+          "type": "aws",
+          "subType": "CloudTrail",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "The CloudTrail logs integrity is not been enforced",
+            "impact": "You cannot trust the integrity of the log files and determine whether they have been tampered with.",
+            "remediation": {
+              "cloudformation": "Set the `Properties.EnableLogFileValidation` attribute to `true`",
+              "terraform": "Set the `enable_log_file_validation` attribute to `true`"
+            },
+            "resolve": "Set the `enable_log_file_validation` attribute to `true`"
+          },
+          "lineNumber": 1,
+          "path": [
+            "input",
+            "resource",
+            "aws_cloudtrail[insecure-logging]",
+            "enable_log_file_validation"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-15",
+          "title": "CloudTrail has logging disabled",
+          "type": "aws",
+          "subType": "CloudTrail",
+          "severity": "high",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Logs are not being kept for your CloudTrail activity",
+            "impact": "That you cannot keep a record of all access and events on your account",
+            "remediation": {
+              "cloudformation": "Set the `Properties.IsLogging` attribute to `true`",
+              "terraform": "Set the `enable_logging` attribute to `true`"
+            },
+            "resolve": "Set the `enable_logging` attribute to `true`"
+          },
+          "lineNumber": 4,
+          "path": [
+            "input",
+            "resource",
+            "aws_cloudtrail[insecure-logging]",
+            "enable_logging"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-135",
+          "title": "CloudTrail does not include all regions",
+          "type": "aws",
+          "subType": "CloudTrail",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "Amazon CloudTrail is not enabled for all regions",
+            "impact": "Logs will not be collected in all the regions",
+            "remediation": {
+              "cloudformation": "Set `Properties.IsMultiRegionTrail` attribute to `true`",
+              "terraform": "Set `is_multi_region_trail` attribute to `true`"
+            },
+            "resolve": "Set `is_multi_region_trail` attribute to `true`"
+          },
+          "lineNumber": 1,
+          "path": [
+            "resource",
+            "aws_cloudtrail[insecure-logging]",
+            "is_multi_region_trail"
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "main.tf",
+      "projectName": "pki",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/modules/pki/main.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": false,
+      "infrastructureAsCodeIssues": [
+        {
+          "id": "SNYK-CC-TF-14",
+          "title": "KMS key does not have key rotation enabled",
+          "type": "aws",
+          "subType": "KMS",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "That your encryption keys are not being rotated by AWS",
+            "impact": "That data is being encrypted with a key which is valid for a longer period of time, resulting in a greater exposure window should that key be leaked",
+            "remediation": {
+              "cloudformation": "Set `Properties.EnableKeyRotation` attribute to `true`",
+              "terraform": "Set `enable_key_rotation` attribute to `true`"
+            },
+            "resolve": "Set `enable_key_rotation` attribute to `true`"
+          },
+          "lineNumber": 1,
+          "path": [
+            "input",
+            "resource",
+            "aws_kms_key[a]",
+            "enable_key_rotation"
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "main.tf",
+      "projectName": "storage",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/modules/storage/main.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": false,
+      "infrastructureAsCodeIssues": [
+        {
+          "id": "SNYK-CC-TF-45",
+          "title": "S3 server access logging is disabled",
+          "type": "aws",
+          "subType": "S3",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "The s3 access logs will not be collected",
+            "impact": "There will be no audit trail of access to s3 objects",
+            "remediation": {
+              "cloudformation": "Set `Properties.LoggingConfiguration` attribute",
+              "terraform": "Add `logging` block attribute"
+            },
+            "resolve": "Add `logging` block attribute"
+          },
+          "lineNumber": 1,
+          "path": [
+            "input",
+            "resource",
+            "aws_s3_bucket[insecure-bucket]",
+            "logging"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-4",
+          "title": "Non-encrypted S3 Bucket",
+          "type": "aws",
+          "subType": "S3",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "That by default S3 buckets do not encrypt the objects that are stored.",
+            "impact": "That should someone gain unauthorized access to the data they would be able to read the contents.",
+            "remediation": {
+              "cloudformation": "Set `BucketEncryption` attribute",
+              "terraform": "Set `server_side_encryption_configuration` block attribute"
+            },
+            "resolve": "Set `server_side_encryption_configuration` block attribute"
+          },
+          "lineNumber": 1,
+          "path": [
+            "input",
+            "resource",
+            "aws_s3_bucket[insecure-bucket]"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-3",
+          "title": "Non-encrypted EBS volume",
+          "type": "aws",
+          "subType": "EC2",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "That this EBS volume is not encrypted. The default behavior is for EBS volumes to be encrypted. ",
+            "impact": "That should someone gain unauthorized access to the data they would be able to read the contents. ",
+            "remediation": {
+              "cloudformation": "Set `Properties.Encrypted` attribute to `true`",
+              "terraform": "Set `encrypted` attribute to `true`"
+            },
+            "resolve": "Set `encrypted` attribute to `true`"
+          },
+          "lineNumber": 8,
+          "path": [
+            "input",
+            "resource",
+            "aws_ebs_volume[example]",
+            "encrypted"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-127",
+          "title": "S3 bucket MFA delete control disabled",
+          "type": "aws",
+          "subType": "S3",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "S3 bucket will not enforce MFA login on delete requests",
+            "impact": "Object could be deleted without stronger MFA authorization",
+            "remediation": null,
+            "resolve": "Set `versioning.mfa_delete` attribute to `true`"
+          },
+          "lineNumber": 1,
+          "path": [
+            "resource",
+            "aws_s3_bucket[insecure-bucket]",
+            "versioning",
+            "mfa_delete"
+          ]
+        },
+        {
+          "id": "SNYK-CC-TF-124",
+          "title": "S3 bucket versioning disabled",
+          "type": "aws",
+          "subType": "S3",
+          "severity": "low",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "S3 bucket versioning is disabled",
+            "impact": "Changes or deletion of objects will not be reversible",
+            "remediation": {
+              "cloudformation": "Set `Properties.VersioningConfiguration.Status` attribute to `Enabled`",
+              "terraform": "Set `versioning.enabled` attribute to `true`"
+            },
+            "resolve": "Set `versioning.enabled` attribute to `true`"
+          },
+          "lineNumber": 1,
+          "path": [
+            "resource",
+            "aws_s3_bucket[insecure-bucket]",
+            "versioning",
+            "enabled"
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "main.tf",
+      "projectName": "vpc",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/modules/vpc/main.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": false,
+      "infrastructureAsCodeIssues": [
+        {
+          "id": "SNYK-CC-TF-1",
+          "title": "Security Group allows open ingress",
+          "type": "aws",
+          "subType": "VPC",
+          "severity": "medium",
+          "isIgnored": false,
+          "iacDescription": {
+            "issue": "That inbound traffic is allowed to a resource from any source instead of a restricted range",
+            "impact": "That potentially everyone can access your resource",
+            "remediation": {
+              "cloudformation": "Set `Properties.SecurityGroupIngress.CidrIp` attribute with a more restrictive IP, for example `192.16.0.0/24`",
+              "terraform": "Set `cidr_block` attribute with a more restrictive IP, for example `192.16.0.0/24`"
+            },
+            "resolve": "Set `cidr_block` attribute with a more restrictive IP, for example `192.16.0.0/24`"
+          },
+          "lineNumber": 21,
+          "path": [
+            "input",
+            "resource",
+            "aws_security_group[allow_ssh]",
+            "ingress"
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "outputs.tf",
+      "projectName": "vpc",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/modules/vpc/outputs.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": true,
+      "infrastructureAsCodeIssues": []
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "variables.tf",
+      "projectName": "vpc",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/modules/vpc/variables.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": true,
+      "infrastructureAsCodeIssues": []
+    },
+    {
+      "meta": {
+        "isPrivate": true,
+        "isLicensesEnabled": false,
+        "policy": "",
+        "ignoreSettings": null,
+        "projectId": "",
+        "org": "playground"
+      },
+      "filesystemPolicy": false,
+      "vulnerabilities": [],
+      "dependencyCount": 0,
+      "licensesPolicy": null,
+      "ignoreSettings": null,
+      "targetFile": "variables.tf",
+      "projectName": "snyk-iac-terraform-demo",
+      "org": "playground",
+      "policy": "",
+      "isPrivate": true,
+      "targetFilePath": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo/variables.tf",
+      "packageManager": "terraformconfig",
+      "path": "/home/antoine/Documents/SnykSB/snyk-iac-terraform-demo",
+      "projectType": "terraformconfig",
+      "ok": true,
+      "infrastructureAsCodeIssues": []
+    }
+  ]
+  
