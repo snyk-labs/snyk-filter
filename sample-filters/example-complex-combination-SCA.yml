@@ -1,0 +1,5 @@
+version: 2
+customFilters:
+  filter: ".vulnerabilities |= map(if ((.type == \"license\" and .severity==\"high\"),  select(.exploit != null and .exploit != \"Not Defined\" and .exploit != \"Unproven\" and .cvssScore>=7.0 and (.isUpgradable == true or .isPatchable ==true))) then . else empty end)"
+  pass: ".vulnerabilities[] | select(.type == \"license\" and .severity==\"high\"),  select(.exploit != null and .exploit != \"Not Defined\" and .exploit != \"Unproven\" and .cvssScore>=7.0 and (.isUpgradable == true or .isPatchable ==true)) | length"
+  msg: "Issues found with filter -> License issue is High severity or Vulnerability is Exploitbale, fixable and severe!! "
