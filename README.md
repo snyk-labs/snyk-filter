@@ -10,12 +10,8 @@ snyk-filter takes the JSON outputted from the [Snyk CLI](https://support.snyk.io
 
 # How do I use it?
 
-## Clone & Install
-
-First, clone the repo.
-Then run
-
-`npm install -g`
+## Install
+`npm i -g snyk-filter`
 
 ### Note about `node-jq`
 
