@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "chalk": "^2.3.2",
-    "debug": "^4.3.1",
+    "debug": "^4.3.4",
     "is-relative": "^1.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.21",
