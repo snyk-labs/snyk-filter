@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-    snyk: snyk/snyk@0.0.8
 jobs:
     build-test-publish:
         docker:
@@ -10,10 +8,6 @@ jobs:
             - run: npm install semantic-release @semantic-release/exec pkg --save-dev
             - run: npm install
             - run: npm test
-            - snyk/scan:
-                fail-on-issues: true
-                monitor-on-build: true
-                token-variable: SNYK_TOKEN
             - run: npx semantic-release
     build-test:
         docker:
@@ -22,11 +16,6 @@ jobs:
             - checkout
             - run: npm install
             - run: npm test
-            - snyk/scan:
-                fail-on-issues: true
-                monitor-on-build: false
-                token-variable: SNYK_TOKEN
-            - run: npx tsc
     build-test-from-fork:
         docker:
             - image: circleci/node:latest
@@ -34,8 +23,6 @@ jobs:
             - checkout
             - run: npm install
             - run: npm test
-            - run: npx tsc
-
 workflows:
     version: 2.1
     nightly:
