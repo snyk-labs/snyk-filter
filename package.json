@@ -16,13 +16,14 @@
     "snyk-filter": "./index.js"
   },
   "dependencies": {
-    "chalk": "^2.3.2",
-    "debug": "^4.3.4",
-    "is-relative": "^1.0.0",
-    "js-yaml": "^3.13.1",
-    "lodash": "^4.17.21",
-    "minimist": "^1.2.6",
-    "node-jq": "^1.12.0",
+    "@snyk/protect": "1.1022.0",
+    "chalk": "5.1.0",
+    "debug": "4.3.4",
+    "is-relative": "1.0.0",
+    "js-yaml": "4.1.0",
+    "lodash": "4.17.21",
+    "minimist": "1.2.6",
+    "node-jq": "2.3.4",
     "snyk": "^1.946.0"
   },
   "devDependencies": {
