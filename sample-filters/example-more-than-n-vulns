@@ -1,0 +1,6 @@
+#This filter fails if there are: >2 high, upgradleable vulns OR >0 critical, upgradeable vulns
+version: 2
+customFilters:
+  filter: "if ([.vulnerabilities[] | select(.isUpgradable == true and .severity == \"high\")] | length > 2) or ([.vulnerabilities[] | select(.isUpgradable == true and .severity == \"critical\")] | length > 0) then .vulnerabilities |= map(if .isUpgradable == true and (.severity == \"high\" or .severity == \"critical\") then . else empty end) else .vulnerabilities |= map(empty) end"
+  pass: "if ([.vulnerabilities[] | select(.isUpgradable == true and .severity == \"high\")] | length > 2) or ([.vulnerabilities[] | select(.isUpgradable == true and .severity == \"critical\")] | length > 0) then 1 else 0 end"
+  msg: "High and critical severity & upgradeable vulns found. Please review upgrade steps"
