@@ -12,6 +12,15 @@ snyk-filter takes the JSON outputted from the [Snyk CLI](https://support.snyk.io
 
 **This repository is in maintenance mode, no new features are being developed. Bug & security fixes will continue to be delivered. Open source contributions are welcome for small features & fixes (no breaking changes)**
 
+## Supported Snyk products
+
+| Product | Supported |
+| ---- | --------- |
+| Open Source    | ✅        |
+| Container   | ✅        |
+| IaC   | ❌         |
+| Code   | ❌        |
+
 # How do I use it?
 
 ## Install
