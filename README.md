@@ -32,7 +32,7 @@ export NODE_JQ_SKIP_INSTALL_BINARY=true
 export JQ_PATH=$(which jq)
 
 # finally, install snyk-filter (does not work with node version > 12)
-sudo npm install -g
+sudo npm install -g snyk-filter
 ```
 
 ## Usage
