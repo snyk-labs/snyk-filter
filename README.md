@@ -6,7 +6,7 @@
 snyk-filter takes the JSON outputted from the [Snyk CLI](https://support.snyk.io/hc/en-us/articles/360003812578-CLI-reference), e.g. `snyk test --json` and applies custom filtering of the results, as well as options to fail your build.
 
 [![Known Vulnerabilities](https://snyk.io//test/github/snyk-tech-services/snyk-filter/badge.svg?targetFile=package.json)](https://snyk.io//test/github/snyk-tech-services/snyk-filter?targetFile=package.json)
-[![CircleCI](https://circleci.com/gh/snyk-tech-services/snyk-filter.svg?style=svg)](https://circleci.com/gh/snyk-tech-services/snyk-filter)
+[![CircleCI](https://circleci.com/gh/snyk-labs/snyk-filter.svg?style=svg)](https://circleci.com/gh/snyk-labs/snyk-filter)
 [![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 
 
