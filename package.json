@@ -2,6 +2,10 @@
   "name": "snyk-filter",
   "version": "1.0.0",
   "description": "Module to consume json output from Snyk CLI for advanced filtering and results display",
+  "repository": { 
+    "type": "git", 
+    "url": "https://github.com/snyk-labs/snyk-filter.git" 
+  },
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests && npm run lint",
