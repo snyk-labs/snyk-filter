@@ -8,10 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.9"
-          architecture: "x64"
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         env:
