@@ -13,7 +13,7 @@ jobs:
           python-version: "3.9"
           architecture: "x64"
       - name: Snyk test
-        run: snyk test --org=ie-playground --file=poetry.lock --package-manager=npm --severity-threshold=critical --project-lifecycle=development
+        run: snyk test --org=ie-playground --severity-threshold=critical --project-lifecycle=development
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   npmtest:
