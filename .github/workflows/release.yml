@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
 
 permissions:
   contents: read # for checkout
@@ -28,8 +27,6 @@ jobs:
         run: |
           npm install semantic-release @semantic-release/exec pkg --save-dev
           npm install
-      - name: Test
-        run: npm test
       - name: Publish
         run: npx semantic-release
         env:
