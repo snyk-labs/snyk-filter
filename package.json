@@ -33,6 +33,5 @@
   },
   "engines": {
     "node": ">=10"
-  },
-  "snyk": true
+  }
 }

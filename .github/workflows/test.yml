@@ -33,5 +33,3 @@ jobs:
           npm install
       - name: Test
         run: npm test
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
