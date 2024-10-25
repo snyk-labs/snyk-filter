@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests && npm run lint",
-    "snyk-protect": "snyk-protect",
+    "snyk-protect": "npx @snyk/protect",
     "prepare": "npm run snyk-protect",
     "lint": "prettier --check **/*.js",
     "format": "prettier --write **/*.js"
@@ -16,7 +16,6 @@
     "snyk-filter": "./index.js"
   },
   "dependencies": {
-    "@snyk/protect": "1.1167.0",
     "chalk": "4.1.2",
     "debug": "4.3.4",
     "is-relative": "1.0.0",
