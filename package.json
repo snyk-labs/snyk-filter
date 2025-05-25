@@ -23,7 +23,7 @@
     "lodash": "4.17.21",
     "minimist": "1.2.8",
     "node-jq": "2.3.5",
-    "mkdirp": "0.5.2",
+    "mkdirp": "0.5.6",
     "cacheable-request": "3.0.0"
   },
   "devDependencies": {
