@@ -163,3 +163,83 @@ describe("Passing", function () {
       });
   });
 });
+
+describe("JSON output regression", function () {
+  const os = require("os");
+  const path = require("path");
+  const fs = require("fs");
+  const yaml = require("js-yaml");
+
+  it("Emits a valid JSON array for multi-project input and includes all filtered results", function (done) {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "snyk-filter-test-"));
+    const filterFile = path.join(tempDir, "test-snyk.yml");
+    const inputFile = path.join(tempDir, "input.json");
+    const testData = [
+      {
+        projectName: "proj1",
+        vulnerabilities: [
+          {
+            id: "A",
+            severity: "low",
+          },
+        ],
+      },
+      {
+        projectName: "proj2",
+        vulnerabilities: [
+          {
+            id: "B",
+            severity: "high",
+          },
+        ],
+      },
+    ];
+
+    fs.writeFileSync(inputFile, JSON.stringify(testData));
+    fs.writeFileSync(
+      filterFile,
+      yaml.dump({
+        customFilters: {
+          filter: '.vulnerabilities |= map(select(.severity == "high"))',
+          pass: '[.vulnerabilities[] | select(.severity == "high")] | length',
+          msg: "Issues detected",
+        },
+      })
+    );
+
+    const originalLog = console.log;
+    const originalError = console.error;
+    const logs = [];
+    console.log = (...args) => logs.push(args.join(" "));
+    console.error = () => {};
+
+    snykFilter
+      .run(inputFile, function () {}, filterFile, { json: true })
+      .then(() => {
+        console.log = originalLog;
+        console.error = originalError;
+
+        assert.strictEqual(logs.length, 1, "Expected one JSON output call");
+
+        const output = JSON.parse(logs[0]);
+        assert(Array.isArray(output), "Expected JSON output to be an array");
+        assert.strictEqual(output.length, 2);
+        assert.strictEqual(output[0].projectName, "proj1");
+        assert.strictEqual(output[1].projectName, "proj2");
+        assert.deepStrictEqual(output[0].vulnerabilities, []);
+        assert.deepStrictEqual(output[1].vulnerabilities, [
+          {
+            id: "B",
+            severity: "high",
+          },
+        ]);
+
+        done();
+      })
+      .catch((err) => {
+        console.log = originalLog;
+        console.error = originalError;
+        done(err);
+      });
+  });
+});

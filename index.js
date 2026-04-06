@@ -37,7 +37,12 @@ if (argv.f) { // output destination
 
 
 
-snykFilter.run(source, onReportOutput, filters, options);
+snykFilter
+  .run(source, onReportOutput, filters, options)
+  .catch((err) => {
+    console.error(err instanceof Error ? err.message : String(err));
+    process.exitCode = 1;
+  });
 
 function onReportOutput(report) {
   if (output) {
