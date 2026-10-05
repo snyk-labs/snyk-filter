@@ -34,3 +34,68 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+
+  build-binaries:
+    needs: build-and-publish
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write # to upload assets to the GitHub release
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            target: node24-linux-x64
+            name: linux-x64
+          - os: ubuntu-24.04-arm
+            target: node24-linux-arm64
+            name: linux-arm64
+          - os: macos-latest
+            target: node24-macos-arm64
+            name: macos-arm64
+          - os: macos-15-intel
+            target: node24-macos-x64
+            name: macos-x64
+          - os: windows-latest
+            target: node24-win-x64
+            name: windows-x64
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Find release tag
+        id: tag
+        run: |
+          git fetch --tags
+          # semantic-release tags the release commit; skip if no release was cut
+          TAG=$(git describe --exact-match --tags HEAD 2>/dev/null || true)
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+      - name: Setup Node.js
+        if: steps.tag.outputs.tag != ''
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Install dependencies
+        if: steps.tag.outputs.tag != ''
+        env:
+          # jq is not bundled; users provide it via JQ_PATH, same as the npm package
+          NODE_JQ_SKIP_INSTALL_BINARY: "true"
+        run: npm install
+      - name: Build binary
+        if: steps.tag.outputs.tag != ''
+        id: build
+        run: |
+          EXT=""
+          if [ "${{ runner.os }}" = "Windows" ]; then EXT=".exe"; fi
+          ASSET="snyk-filter-${{ steps.tag.outputs.tag }}-${{ matrix.name }}$EXT"
+          npx pkg . --fallback-to-source --targets ${{ matrix.target }} --output "$ASSET"
+          echo "asset=$ASSET" >> "$GITHUB_OUTPUT"
+      - name: Upload to GitHub release
+        if: steps.tag.outputs.tag != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "${{ steps.tag.outputs.tag }}" "${{ steps.build.outputs.asset }}" --clobber
