@@ -35,6 +35,14 @@ export JQ_PATH=$(which jq)
 sudo npm install -g
 ```
 
+### Standalone binaries
+
+Each GitHub release also attaches standalone executables for Linux, macOS and Windows (no Node.js required). They do not bundle `jq`. Install it separately and point `JQ_PATH` at it, as described in the following command execution.
+
+```
+JQ_PATH=$(which jq) ./snyk-filter-<version>-linux-x64 -i results.json
+```
+
 ## Usage
 
 1. Implement your custom JQ filters in a .snyk-filter/snyk.yml file relative to your current working directory where you will be running snyk test from (see in [sample-filters](https://github.com/snyk-tech-services/snyk-filter/tree/develop/sample-filters) and tweak things from there - use [JQPlay](https://jqplay.org/) )
