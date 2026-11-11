@@ -25,6 +25,8 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "lts/*"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
       - name: Install dependencies
         run: npm install
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
@@ -32,7 +34,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
   build-binaries:
